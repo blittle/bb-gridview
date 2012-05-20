@@ -1,8 +1,10 @@
 define(
 	["backbone","underscore", 'text!templates/grid.html', 'text!templates/row.html'],
 function( Backbone, _ , GridTemplate, RowTemplate) {
-		
-	var RowView = Backbone.View.extend({
+	
+	var RowView, GridView;
+
+	RowView = Backbone.View.extend({
 		tagName: "tr",
 		className: "gvRow",
 		initialize: function() {
@@ -14,7 +16,7 @@ function( Backbone, _ , GridTemplate, RowTemplate) {
 		}
 	});
 	
-	var GridView = Backbone.View.extend({
+	GridView = Backbone.View.extend({
 		
 		className: "gridView",
 	

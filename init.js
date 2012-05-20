@@ -7,10 +7,15 @@ require.config({
 	} 
 }); 
 
-require(['backbone', 'underscore', 'gridView'], function(Backbone, _, GridView) {
+require(['backbone', 'underscore', 'jquery', 'gridView'], function(Backbone, _, $, GridView) {
 	
+	"use strict";
+
+	var exCollection, formatTitle, gridView, testView;
+
 	// Any backbone collection of models can be passed into the gridView
-	var exCollection = new Backbone.Collection();
+	// Randomly generate a collection for demonstration
+	exCollection = new Backbone.Collection();
 	_.times(100, function(i) {
 		exCollection.add({
 			id: i,
@@ -20,11 +25,14 @@ require(['backbone', 'underscore', 'gridView'], function(Backbone, _, GridView) 
 		});
 	});
 	
-	var formatTitle= function(attr) {
-		return '<a href="#' + this.id + '">'+attr+'</a>';
+	// Each column can be passed a function which will customly format
+	// the column.  If using a custom formatting function, make sure
+	// you escape any embedded values.
+	formatTitle = function(attr) {
+		return '<a href="#' + _.escape(this.id) + '">' + _.escape(attr) + '</a>';
 	};
 		
-	var gridView = new GridView({
+	gridView = new GridView({
 		collection: exCollection,
 		columns: [	
 			{
@@ -45,6 +53,6 @@ require(['backbone', 'underscore', 'gridView'], function(Backbone, _, GridView) 
 		logRenderTime: true
 	});
 	
-	this.$('#example1').html(gridView.el);
+	$('#example1').html(gridView.el);
 
 });
