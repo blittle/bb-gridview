@@ -21,7 +21,6 @@ function( Backbone, _ , GridTemplate, RowTemplate) {
 		className: "gridView",
 	
 		initialize: function() {
-			this.time = new Date().getTime();
 			
 			this.gridTemplate = _.template(GridTemplate, undefined, {variable: 'o'});
 			this.rowTemplate = _.template(RowTemplate, undefined, {variable: 'o'});
@@ -31,25 +30,22 @@ function( Backbone, _ , GridTemplate, RowTemplate) {
 				autoRenderNewRows: true,
 				autoRemoveRows: true,
 				width: 700,
-				height:300,
+				height:200,
 				logRenderTime: false
 			}, this.options);
 			
-			
-			this.render();	
-			
-			if(this.options.logRenderTime) console.log("Render time (ms)", (new Date().getTime()) - this.time);	
-				
 		},
 		
 		render: function() {
+			var time = new Date().getTime();		
 			this.$el.html(this.gridTemplate({options: this.options}));
 			this.buildGrid();
+			if(this.options.logRenderTime) console.log("Render time (ms)", (new Date().getTime()) - time);	
 		},
 		
 		buildGrid: function() {
-			var $gvGrid = this.$('.gvGrid');
-			$gvGrid.html("").hide();
+			var $gvGrid = this.$('.gvGrid').html("").hide();
+
 			this.collection.each(this.buildRow, this);
 			$gvGrid.show();
 			
@@ -57,7 +53,9 @@ function( Backbone, _ , GridTemplate, RowTemplate) {
 		},
 		
 		buildRow: function(model, i) {			
-			var rowView = new RowView(_.extend(this.options, {model: model, rowTemplate: this.rowTemplate}));
+			var rowView = new RowView(_.extend(this.options, 
+				{model: model, rowTemplate: this.rowTemplate}
+			));
 			this.$('.gvGrid').append(rowView.el);
 		}
 		

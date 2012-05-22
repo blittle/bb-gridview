@@ -11,12 +11,12 @@ require(['backbone', 'underscore', 'jquery', 'gridView'], function(Backbone, _, 
 	
 	"use strict";
 
-	var exCollection, formatTitle, gridView, testView;
+	var exCollection, formatTitle, gridView1, gridView2, gridView3, testView;
 
 	// Any backbone collection of models can be passed into the gridView
 	// Randomly generate a collection for demonstration
 	exCollection = new Backbone.Collection();
-	_.times(100, function(i) {
+	_.times(25, function(i) {
 		exCollection.add({
 			id: i,
 			title: "Object " + i,
@@ -32,7 +32,29 @@ require(['backbone', 'underscore', 'jquery', 'gridView'], function(Backbone, _, 
 		return '<a href="#' + _.escape(this.id) + '">' + _.escape(attr) + '</a>';
 	};
 		
-	gridView = new GridView({
+	gridView1 = new GridView({
+		collection: exCollection,
+		columns: [	
+			{
+				key: 'title',
+				label: 'Title'
+			},				
+			{
+				key: 'count',
+				label: 'Count'
+			},
+			{
+				key: 'date',
+				label: 'Date'
+			}
+		]
+	});
+	
+	$('#example1').html(gridView1.el);
+	gridView1.render();
+
+
+	gridView2 = new GridView({
 		collection: exCollection,
 		columns: [	
 			{
@@ -53,6 +75,7 @@ require(['backbone', 'underscore', 'jquery', 'gridView'], function(Backbone, _, 
 		logRenderTime: true
 	});
 	
-	$('#example1').html(gridView.el);
+	$('#example2').html(gridView2.el);
+	gridView2.render();
 
 });
