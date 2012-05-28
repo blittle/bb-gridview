@@ -7,75 +7,66 @@ require.config({
 	} 
 }); 
 
-require(['backbone', 'underscore', 'jquery', 'gridView'], function(Backbone, _, $, GridView) {
+require(['backbone', 'underscore', 'jquery', 'exampleView', 
+	'text!examples/basicExample.js', 'text!examples/customFormatters.js'], 
+	function(Backbone, _, $, ExampleView, basicExample, customFormatters) {
 	
 	"use strict";
 
-	var exCollection, formatTitle, gridView1, gridView2, gridView3, testView;
+	var examples = new Backbone.Collection(),
+		exampleView;
 
-	// Any backbone collection of models can be passed into the gridView
-	// Randomly generate a collection for demonstration
-	exCollection = new Backbone.Collection();
-	_.times(25, function(i) {
-		exCollection.add({
-			id: i,
-			title: "Object " + i,
-			date: new Date().getTime(),
-			count: Math.random() * 100
-		});
-	});
+	examples.add([
+		{
+			title: "Basic Example",
+			code: basicExample
+		},
+		{
+			title: "Custom Formatters",
+			code: customFormatters
+		}
+	]);
+
+	exampleView = new ExampleView({collection: examples});
+
+	$('body').html(exampleView.el);
+	exampleView.render();
 	
 	// Each column can be passed a function which will customly format
 	// the column.  If using a custom formatting function, make sure
 	// you escape any embedded values.
-	formatTitle = function(attr) {
-		return '<a href="#' + _.escape(this.id) + '">' + _.escape(attr) + '</a>';
-	};
+	// formatTitle = function(attr) {
+	// 	return '<a href="#' + _.escape(this.id) + '">' + _.escape(attr) + '</a>';
+	// };
 		
-	gridView1 = new GridView({
-		collection: exCollection,
-		columns: [	
-			{
-				key: 'title',
-				label: 'Title'
-			},				
-			{
-				key: 'count',
-				label: 'Count'
-			},
-			{
-				key: 'date',
-				label: 'Date'
-			}
-		]
-	});
 	
-	$('#example1').html(gridView1.el);
-	gridView1.render();
+	
+	// $('#example1').html(gridView1.el);
+	// gridView1.render();
 
 
-	gridView2 = new GridView({
-		collection: exCollection,
-		columns: [	
-			{
-				key: 'title',
-				label: 'Title',
-				formatter: formatTitle
-			},				
-			{
-				key: 'count',
-				label: 'Count'
-			},
-			{
-				key: 'date',
-				label: 'Date',
-				className: 'dateColumn'
-			}
-		],
-		logRenderTime: true
-	});
+	// gridView2 = new GridView({
+	// 	collection: exCollection,
+	// 	columns: [	
+	// 		{
+	// 			key: 'title',
+	// 			label: 'Title',
+	// 			formatter: formatTitle
+	// 		},				
+	// 		{
+	// 			key: 'count',
+	// 			label: 'Count'
+	// 		},
+	// 		{
+	// 			key: 'date',
+	// 			label: 'Date',
+	// 			className: 'dateColumn'
+	// 		}
+	// 	],
+	// 	logRenderTime: true
+	// });
 	
-	$('#example2').html(gridView2.el);
-	gridView2.render();
+	// $('#example2').html(gridView2.el);
+	// gridView2.render();
 
 });
