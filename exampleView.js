@@ -23,6 +23,7 @@ define(["backbone", "underscore", "gridView"], function(Backbone, _, GridView) {
 			});
 
 			this.$('#right').width($(window).width() - 200);
+			this.$('#left').height($(window).height());
 
 			this.delegateEvents();
 		},
