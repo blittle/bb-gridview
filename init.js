@@ -19,10 +19,12 @@ require(['backbone', 'underscore', 'jquery', 'exampleView',
 	examples.add([
 		{
 			title: "Basic Example",
+			description: "The GridView can render any Backbone collection. Pass a columns option with an array that specified which model attributes will be displayed in each column. You can also specify the column heading label.",
 			code: basicExample
 		},
 		{
 			title: "Custom Formatters",
+			description: "A custom formatting function can be applied to any column. The function is passed the attribute value that will be displayed by default. The function itself is executed in the context/scope of the Backbone Model for that row. This gives you access to other attributes of the model if needed.",
 			code: customFormatters
 		}
 	]);

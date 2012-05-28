@@ -22,6 +22,8 @@ define(["backbone", "underscore", "gridView"], function(Backbone, _, GridView) {
 				that.$('#left').append('<a id="' + i + '">' + example.title + '</a><br>');
 			});
 
+			this.$('#right').width($(window).width() - 200);
+
 			this.delegateEvents();
 		},
 
@@ -30,6 +32,7 @@ define(["backbone", "underscore", "gridView"], function(Backbone, _, GridView) {
 				$right = this.$('#right');
 			
 			$right.html("<h1>" + example.title + "</h1>");
+			$right.append("<p>" + example.description + "</p>");
 			$right.append("<pre><code>"+ _.escape(example.code) + "</code></pre><div id='example'/>");
 			eval(example.code);
 		},

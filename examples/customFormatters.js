@@ -1,7 +1,6 @@
 var exCollection = new Backbone.Collection(),
 	gridView, formatTitle;
 
-// Random data
 _.times(25, function(i) {
 	exCollection.add({
 		id: i,
