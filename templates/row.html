@@ -1,0 +1,6 @@
+<%_.each(o.options.columns, function(column) { 
+	var val = column.formatter ? column.formatter.call(o.model, o.model[column.key]) : o.model[column.key],
+		sClassName = column.className ? "class='" + column.className + "'" : "";
+%> 
+	<td <%-sClassName%> width='<%=o.options.width / o.options.columns.length%>'><p><%=val%></p></td> 
+<%});%>

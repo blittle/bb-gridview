@@ -1,0 +1,65 @@
+#left, #right {
+	float: left;
+	&#left {
+		width: 150px;
+	}
+	&#right {
+		margin-left: 10px;
+		margin-bottom: 20px;
+	}
+}
+
+pre {
+	background-color: #333333;
+	border-radius:10px;
+
+	padding:10px;
+
+	color: white;
+}
+
+a:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+h1 {
+	margin: 0;
+}
+
+.example {
+	margin-bottom:30px;
+}
+
+td {
+	border-right: 1px solid black;
+	& p {
+		margin:0;
+		padding:0;
+		padding-left: 3px;
+	}
+}
+
+.gridWrapper {
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.gvHeader {
+	background-color: #666;
+	color: white;
+}
+
+.gvGrid {
+	tr {
+		background-color: white;
+		&:hover {
+			background-color: #aaa;
+		}
+	}
+}
+
+.dateColumn {
+	p {text-align: right;}
+}
+
