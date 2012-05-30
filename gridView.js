@@ -8,12 +8,30 @@ function( Backbone, _ , GridTemplate, RowTemplate) {
 		tagName: "tr",
 		className: "gvRow",
 		initialize: function() {
+			if(this.options.selection) {
+				this.events.click = "selectRow";
+
+				if(this.options.selectionColumn) {
+					this.events["click .selectionColumn"] = "addToSelection";
+				}
+			}
 			this.render();			
 			this.model.on("change", this.render, this);
 		},
 		render: function() {		
-			this.$el.html(this.options.rowTemplate({model: this.model.toJSON(), options: this.options}));			
-		}
+			this.$el.html(this.options.rowTemplate({model: this.model.toJSON(), options: this.options}));	
+			this.$el.attr('id', this.model.id);		
+		},
+		events: {
+
+		},
+		selectRow: function(e) {			
+			this.options.selectedModels.reset(this.model);
+		},
+		addToSelection: function(e) {
+			this.options.selectedModels.add(this.model);	
+			e.stopPropogation();
+		} 
 	});
 	
 	GridView = Backbone.View.extend({
@@ -31,9 +49,21 @@ function( Backbone, _ , GridTemplate, RowTemplate) {
 				autoRemoveRows: true,
 				width: 700,
 				height:200,
-				logRenderTime: false
+				logRenderTime: false,
+				selection: true,
+				selectionColumn: false,
+				selectedModels: new Backbone.Collection(),
 			}, this.options);
-			
+
+			this.options.selectedModels.on('all', this.updateSelection, this);
+		},
+
+		updateSelection: function() {
+			var scope = this;
+			this.$('tr').removeClass('selected');
+			this.options.selectedModels.each(function(model, i) {
+				scope.$('#'+model.id).addClass('selected');
+			});
 		},
 		
 		render: function() {

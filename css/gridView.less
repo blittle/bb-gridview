@@ -1,3 +1,5 @@
+@import "elements.less";
+
 body {
 	margin: 0;
 }
@@ -37,7 +39,7 @@ h1 {
 }
 
 td {
-	border-right: 1px solid black;
+	border-right: 1px solid #A9B3BF;
 	& p {
 		margin:0;
 		padding:0;
@@ -48,11 +50,20 @@ td {
 .gridWrapper {
 	overflow-y: auto;
 	overflow-x: hidden;
+	border: 1px solid #A9B3BF;
+	border-top: 0;
+	border-right: 0;
 }
 
 .gvHeader {
-	background-color: #666;
-	color: white;
+	.gradient( #B5DBFF, #B5DBFF, #6EB3FE);
+	color: #3789C5;
+	border: 1px solid #A9B3BF;
+	border-bottom: 0;
+	border-right:0;
+	p {
+		padding: 4px;
+	}
 }
 
 .gvGrid {
@@ -60,6 +71,10 @@ td {
 		background-color: white;
 		&:hover {
 			background-color: #aaa;
+		}
+
+		&.selected {
+			background-color: lightgray;
 		}
 	}
 }
