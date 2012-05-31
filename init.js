@@ -29,7 +29,7 @@ require(['backbone', 'underscore', 'jquery', 'exampleView',
 		},
 		{
 			title: "Selection Column",
-			description: 'Enable column selection by passing "selectionColumn: true" as an option. Optionally, provide a backbone collection which will represent the rows/models that are currently selected. Bind on this collection to be notified when the user selects a row.',
+			description: 'Enable column selection by passing "selectionColumn: true" as an option. Optionally, provide a backbone collection which will represent the rows/models that are currently selected. Bind on this collection to be notified when the user selects a row. By default row selection is enabled even without the selection column, to disable it pass the option selection: false',
 			code: columnSelection
 		}
 	]);

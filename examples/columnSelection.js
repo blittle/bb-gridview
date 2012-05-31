@@ -15,6 +15,7 @@ gridView = new GridView({
 	collection: exCollection,
 	selectedModels: selectedModels,
 	selectionColumn: true,
+	selection: true, //Turn off all selection features by passing false (default is true)
 	columns: [	
 		{
 			key: 'title',

@@ -61,8 +61,9 @@ function( Backbone, _ , GridTemplate, RowTemplate) {
 		updateSelection: function() {
 			var scope = this;
 			this.$('tr').removeClass('selected');
+			this.$('.selectionColumn').prop('checked', false);
 			this.options.selectedModels.each(function(model, i) {
-				scope.$('#'+model.id).addClass('selected');
+				scope.$('#'+model.id).addClass('selected').find('.selectionColumn').prop('checked', true);
 			});
 		},
 		
