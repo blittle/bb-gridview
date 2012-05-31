@@ -46,14 +46,14 @@ function( Backbone, _ , GridTemplate, RowTemplate) {
 			$td.find('p').show();
 			$td.find('input').hide();
 
-			e.stopPropogation();
+			e.stopPropagation();
 		},
 		selectRow: function(e) {			
 			this.options.selectedModels.reset(this.model);
 		},
 		addToSelection: function(e) {
 			this.options.selectedModels.add(this.model);	
-			e.stopPropogation();
+			e.stopPropagation();
 		} 
 	});
 	
@@ -96,6 +96,17 @@ function( Backbone, _ , GridTemplate, RowTemplate) {
 			this.$el.html(this.gridTemplate({options: this.options}));
 			this.buildGrid();
 			if(this.options.logRenderTime) console.log("Render time (ms)", (new Date().getTime()) - time);	
+
+			this.$el.attr('unselectable', 'on')
+               .css({
+                   '-moz-user-select':'none',
+                   '-webkit-user-select':'none',
+                   'user-select':'none',
+                   '-ms-user-select':'none'
+               })
+               .each(function() {
+                   this.onselectstart = function() { return false; };
+               });
 		},
 		
 		buildGrid: function() {
