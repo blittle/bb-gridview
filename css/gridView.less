@@ -1,13 +1,24 @@
 @import "elements.less";
+@import url(http://fonts.googleapis.com/css?family=Merriweather);
 
 body {
 	margin: 0;
+	font-family: 'Merriweather', serif;
+	font-size: .9em;
 }
 
 #left, #right {
 	float: left;
 	&#left {
 		width: 150px;
+		ul {
+			padding: 0;
+			margin: 0;
+		}
+		li {
+			list-style-type:none; 
+			padding: 6px;
+		}
 	}
 	&#right {
 		margin-left: 10px;
@@ -20,7 +31,7 @@ pre {
 	border-radius:10px;
 
 	padding:20px;
-	font-size:.8em;
+	font-size:.9em;
 
 	color: white;
 }
@@ -44,6 +55,9 @@ td {
 		margin:0;
 		padding:0;
 		padding-left: 3px;
+	}
+	.editField {
+		display: none;
 	}
 }
 

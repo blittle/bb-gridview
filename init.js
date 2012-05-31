@@ -8,8 +8,10 @@ require.config({
 }); 
 
 require(['backbone', 'underscore', 'jquery', 'exampleView', 
-	'text!examples/basicExample.js', 'text!examples/customFormatters.js', 'text!examples/columnSelection.js'], 
-	function(Backbone, _, $, ExampleView, basicExample, customFormatters, columnSelection) {
+	'text!examples/basicExample.js', 'text!examples/customFormatters.js', 'text!examples/columnSelection.js',
+	'text!examples/dynamicRendering.js', 'text!examples/editableGrid.js'], 
+	function(Backbone, _, $, ExampleView, basicExample, customFormatters, columnSelection, dynamicRendering,
+		editableGrid) {
 	
 	"use strict";
 
@@ -31,6 +33,16 @@ require(['backbone', 'underscore', 'jquery', 'exampleView',
 			title: "Selection Column",
 			description: 'Enable column selection by passing "selectionColumn: true" as an option. Optionally, provide a backbone collection which will represent the rows/models that are currently selected. Bind on this collection to be notified when the user selects a row. By default row selection is enabled even without the selection column, to disable it pass the option selection: false',
 			code: columnSelection
+		},
+		{
+			title: "Dynamic Rendering",
+			description: "New models added to the the collection are automatically rendered and appended to the grid.",
+			code: dynamicRendering
+		},
+		{
+			title: 'Editable Grid',
+			description: 'Enable row element editing by passing an \'editable\' flag within the column options. Double click on an element to edit it',
+			code: editableGrid
 		}
 	]);
 

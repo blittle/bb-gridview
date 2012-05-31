@@ -15,6 +15,7 @@ function( Backbone, _ , GridTemplate, RowTemplate) {
 					this.events["click .selectionColumn"] = "addToSelection";
 				}
 			}
+
 			this.render();			
 			this.model.on("change", this.render, this);
 		},
@@ -23,7 +24,29 @@ function( Backbone, _ , GridTemplate, RowTemplate) {
 			this.$el.attr('id', this.model.id);		
 		},
 		events: {
+			'dblclick td': 'startEditing',
+			'blur .editField': 'saveField',
+			'change .editField': 'saveField'
+		},
+		startEditing: function(e) {
+			var $td = this.$(e.target).closest('td'),
+				key = $td.attr('key');
+			if(_.find(this.options.columns, function(col) { return col.key === key }).editable ) {
+				$td.find('p').hide();
+				$td.find('input').show().focus();				
+			}
+		},
+		saveField: function(e) {
+			var $td = this.$(e.target).closest('td'),
+				key = $td.attr('key'), obj = {};
+				
+			obj[key] = this.$(e.target).val();
+			this.model.set(obj);	
 
+			$td.find('p').show();
+			$td.find('input').hide();
+
+			e.stopPropogation();
 		},
 		selectRow: function(e) {			
 			this.options.selectedModels.reset(this.model);
@@ -56,6 +79,7 @@ function( Backbone, _ , GridTemplate, RowTemplate) {
 			}, this.options);
 
 			this.options.selectedModels.on('all', this.updateSelection, this);
+			this.collection.on('add', this.buildRow, this);
 		},
 
 		updateSelection: function() {
