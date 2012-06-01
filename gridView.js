@@ -137,12 +137,21 @@ function( Backbone ,_ ,GridTemplate, RowTemplate) {
 		},
 
 		findModels: function(searchVal) {
-			var scope = this;
+			var scope = this,
+				searchVal = scope.options.caseSensitive ? searchVal : (searchVal+'').toLowerCase();
 
 			return _.filter(scope.collection.models, function(model) {
 				if(searchVal === '') return true;
-				for(var col in scope.options.columns) {
-					if((model.attributes[scope.options.columns[col].key]+'').indexOf(searchVal+'') !== -1) return true;
+
+				var columns = scope.options.columns,
+					attributes = model.attributes,
+					value = '';
+
+				for(var col in columns) {
+					value = attributes[columns[col].key]+'';
+					value = scope.options.caseSensitive ? value : value.toLowerCase();
+
+					if(value.indexOf(searchVal) !== -1) return true;
 				}
 				return false;
 			});

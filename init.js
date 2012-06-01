@@ -46,7 +46,7 @@ require(['backbone', 'underscore', 'jquery', 'exampleView',
 		},
 		{
 			title: 'Grid Filtering',
-			description: 'Realtime filter the grid through an external input element',
+			description: 'Realtime filter the grid through an external input element. If the filtering should be case sensitive, pass "caseSensitive: true" as an option.',
 			code: filterGrid
 		}
 	]);
