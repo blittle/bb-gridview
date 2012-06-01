@@ -52,7 +52,12 @@ function( Backbone, _ , GridTemplate, RowTemplate) {
 			this.options.selectedModels.reset(this.model);
 		},
 		addToSelection: function(e) {
-			this.options.selectedModels.add(this.model);	
+			if(this.options.selectedModels.get(this.model.id)) {
+				this.options.selectedModels.remove(this.model);	
+			} else {
+				this.options.selectedModels.add(this.model);		
+			}
+			
 			e.stopPropagation();
 		} 
 	});
@@ -123,6 +128,22 @@ function( Backbone, _ , GridTemplate, RowTemplate) {
 				{model: model, rowTemplate: this.rowTemplate}
 			));
 			this.$('.gvGrid').append(rowView.el);
+		},
+
+		events: {
+			'click .selectAll': 'selectAll'
+		},
+
+		selectAll: function(e) {
+			var selectAll = this.$(e.target).prop('checked');
+			
+			if(selectAll) {
+				this.$('.selectionColumn').prop('checked', true).closest('tr').addClass('selected');
+				this.options.selectedModels.reset(this.collection.models, {silent: true});
+			} else {
+				this.$('.selectionColumn').prop('checked', false).closest('tr').removeClass('selected');
+				this.options.selectedModels.reset([], {silent: true});
+			}
 		}
 		
 	});
