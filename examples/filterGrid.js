@@ -28,6 +28,7 @@ gridView = new GridView({
 			label: 'Date'
 		}
 	],
+	logRenderTime: true,
 	externalFilter: $('#search')
 });
 

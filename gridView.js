@@ -106,10 +106,8 @@ function( Backbone ,_ ,GridTemplate, RowTemplate) {
 		},
 		
 		render: function() {
-			var time = new Date().getTime();		
 			this.$el.html(this.gridTemplate({options: this.options}));
 			this.buildGrid();
-			if(this.options.logRenderTime) console.log("Render time (ms)", (new Date().getTime()) - time);	
 
 			this.$el.attr('unselectable', 'on')
                .css({
@@ -125,7 +123,7 @@ function( Backbone ,_ ,GridTemplate, RowTemplate) {
 		
 		buildGrid: function() {
 			var $gvGrid = this.$('.gvGrid').html("").hide(),
-				searchVal = '', scope = this;
+				searchVal = '', scope = this, time = new Date().getTime();
 
 			if(this.options.externalFilter) searchVal = this.options.externalFilter.val();
 
@@ -133,7 +131,8 @@ function( Backbone ,_ ,GridTemplate, RowTemplate) {
 
 			$gvGrid.show();
 			
-			if(this.options.onRender) this.options.onRender.call(this);
+			if(this.options.onRender) this.options.onRender.call(this);			
+			if(this.options.logRenderTime) console.log("Render time (ms)", (new Date().getTime()) - time);	
 		},
 
 		findModels: function(searchVal) {
