@@ -1,6 +1,6 @@
 define(
 	["backbone","underscore", 'text!templates/grid.html', 'text!templates/row.html'],
-function( Backbone, _ , GridTemplate, RowTemplate) {
+function( Backbone ,_ ,GridTemplate, RowTemplate) {
 	
 	var RowView, GridView;
 
@@ -85,6 +85,15 @@ function( Backbone, _ , GridTemplate, RowTemplate) {
 
 			this.options.selectedModels.on('all', this.updateSelection, this);
 			this.collection.on('add', this.buildRow, this);
+
+			if(this.options.externalFilter) {
+				this.options.externalFilter.keydown(_.bind(this.startSearch, this));
+			}
+		},
+
+		startSearch: function(e) {
+			if(this.timeout) clearTimeout(this.timeout);
+			this.timeout = setTimeout(_.bind(this.buildGrid, this),300);
 		},
 
 		updateSelection: function() {
@@ -115,12 +124,28 @@ function( Backbone, _ , GridTemplate, RowTemplate) {
 		},
 		
 		buildGrid: function() {
-			var $gvGrid = this.$('.gvGrid').html("").hide();
+			var $gvGrid = this.$('.gvGrid').html("").hide(),
+				searchVal = '', scope = this;
 
-			this.collection.each(this.buildRow, this);
+			if(this.options.externalFilter) searchVal = this.options.externalFilter.val();
+
+			_.each( this.findModels(searchVal), _.bind(scope.buildRow, scope) );
+
 			$gvGrid.show();
 			
 			if(this.options.onRender) this.options.onRender.call(this);
+		},
+
+		findModels: function(searchVal) {
+			var scope = this;
+
+			return _.filter(scope.collection.models, function(model) {
+				if(searchVal === '') return true;
+				for(var col in scope.options.columns) {
+					if((model.attributes[scope.options.columns[col].key]+'').indexOf(searchVal+'') !== -1) return true;
+				}
+				return false;
+			});
 		},
 		
 		buildRow: function(model, i) {			

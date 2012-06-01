@@ -9,9 +9,9 @@ require.config({
 
 require(['backbone', 'underscore', 'jquery', 'exampleView', 
 	'text!examples/basicExample.js', 'text!examples/customFormatters.js', 'text!examples/columnSelection.js',
-	'text!examples/dynamicRendering.js', 'text!examples/editableGrid.js'], 
+	'text!examples/dynamicRendering.js', 'text!examples/editableGrid.js', 'text!examples/filterGrid.js'], 
 	function(Backbone, _, $, ExampleView, basicExample, customFormatters, columnSelection, dynamicRendering,
-		editableGrid) {
+		editableGrid, filterGrid) {
 	
 	"use strict";
 
@@ -43,6 +43,11 @@ require(['backbone', 'underscore', 'jquery', 'exampleView',
 			title: 'Editable Grid',
 			description: 'Enable row element editing by passing an \'editable\' flag within the column options. Double click on an element to edit it',
 			code: editableGrid
+		},
+		{
+			title: 'Grid Filtering',
+			description: 'Realtime filter the grid through an external input element',
+			code: filterGrid
 		}
 	]);
 
