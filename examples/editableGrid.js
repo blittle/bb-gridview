@@ -1,7 +1,7 @@
 var exCollection = new Backbone.Collection(),
-	gridView, formatTitle, formatDate;
+	gridView;
 
-_.times(25, function(i) {
+_.times(10, function(i) {
 	exCollection.add({
 		id: i,
 		title: 'Object ' + i,
@@ -10,22 +10,13 @@ _.times(25, function(i) {
 	});
 });
 
-formatTitle = function(attr) {
-	return '<a href="#' + _.escape(this.id) + '">' + _.escape(attr) + '</a>';
-};
-
-formatDate = function(attr) {	
-	var date = new Date(attr);
-	return date.getMonth() + '-' + date.getDate() + '-' + date.getFullYear();
-}
-		
 gridView = new GridView({
 	collection: exCollection,
 	columns: [	
 		{
 			key: 'title',
 			label: 'Title',
-			formatter: formatTitle
+			editable: true
 		},				
 		{
 			key: 'count',
@@ -34,12 +25,10 @@ gridView = new GridView({
 		{
 			key: 'date',
 			label: 'Date',
-			formatter: formatDate,
-			className: 'dateColumn'
+			editable: true
 		}
-	],
-	logRenderTime: true
+	]
 });
-	
+
 $('#example').html(gridView.el);
 gridView.render();

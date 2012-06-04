@@ -1,5 +1,10 @@
 <table width='<%=o.options.width%>' style='height: <%=o.options.height%>' class='gvHeader' cellspacing=0 cellpadding=0>
 	<tr><%
+		if(o.options.selectionColumn) {
+		%>
+			<td><input type='checkbox' class='selectionColumn selectAll'/></td>
+		<%
+		}
 		_.each(o.options.columns, function(column) {%>
 		<td width='<%=o.options.width / o.options.columns.length%>'><p><%=column.label%></p></td>
 		<%})%>

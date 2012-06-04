@@ -1,65 +1,61 @@
-#left, #right {
-	float: left;
-	&#left {
-		width: 150px;
+.gridView {
+
+	.gridWrapper {
+		overflow-y: auto;
+		overflow-x: hidden;
+		//border: 1px solid #A9B3BF;
+		border-top: 0;
+		border-right: 0;
 	}
-	&#right {
-		margin-left: 10px;
-		margin-bottom: 20px;
+
+	.gvHeader {
+		background: #B5DBFF;
+		background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #B5DBFF), color-stop(1, #6EB3FE));
+		background: -ms-linear-gradient(bottom, #B5DBFF, #6EB3FE);
+		background: -moz-linear-gradient(center bottom, #B5DBFF 0%, #6EB3FE 100%);
+		color: #3789C5;
+		//border: 1px solid #A9B3BF;
+		border-bottom: 0;
+		border-right:0;
+		p {
+			padding: 4px;
+		}
 	}
-}
 
-pre {
-	background-color: #333333;
-	border-radius:10px;
-
-	padding:10px;
-
-	color: white;
-}
-
-a:hover {
-	text-decoration: underline;
-	cursor: pointer;
-}
-
-h1 {
-	margin: 0;
-}
-
-.example {
-	margin-bottom:30px;
-}
-
-td {
-	border-right: 1px solid black;
-	& p {
-		margin:0;
-		padding:0;
-		padding-left: 3px;
+	td {
+		border-right: 1px solid #A9B3BF;
+		&:last-child {
+			border-right: 0;
+		}
+		& p {
+			margin:0;
+			padding:0;
+			padding-left: 3px;
+		}
+		.editField {
+			display: none;
+		}
 	}
-}
 
-.gridWrapper {
-	overflow-y: auto;
-	overflow-x: hidden;
-}
+	.gvGrid {
 
-.gvHeader {
-	background-color: #666;
-	color: white;
-}
+		tr {
+			background-color: white;
 
-.gvGrid {
-	tr {
-		background-color: white;
-		&:hover {
-			background-color: #aaa;
+			&:nth-child(even) {
+				background-color: #B5DBFF;
+			}
+			&:hover {
+				background-color: #aaa;
+			}
+
+			&.selected {
+				background-color: lightgray;
+
+				&:nth-child(even) {
+					background-color: #ccc;
+				}
+			}
 		}
 	}
 }
-
-.dateColumn {
-	p {text-align: right;}
-}
-
