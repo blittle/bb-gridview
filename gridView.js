@@ -1,8 +1,45 @@
 define(
-	["backbone","underscore", 'text!templates/grid.html', 'text!templates/row.html'],
-function( Backbone ,_ ,GridTemplate, RowTemplate) {
+	["backbone","underscore"],
+function( Backbone ,_) {
 	
-	var RowView, GridView;
+	var RowView, GridView, GridTemplate, RowTemplate;
+
+	GridTemplate = ""
+	+ "<table width='<%=o.options.width%>' style='height: <%=o.options.height%>' class='gvHeader' cellspacing=0 cellpadding=0>"
+		+ " <tr><% " 
+		+ "	if(o.options.selectionColumn) { "
+		+ "	%> "
+		+ "	<td><input type='checkbox' class='selectionColumn selectAll'/></td> "
+		+ "	<% "
+		+ "	} "
+		+ "	_.each(o.options.columns, function(column) {%> "
+		+ "	<td width='<%=o.options.width / o.options.columns.length%>'><p><%=column.label%></p></td> "
+		+ "	<%})%> "
+		+ "</tr> "
+	+ "</table> "
+	+ "<div class='gridWrapper' style='width:<%=o.options.width%>px; height:<%=o.options.height%>px;'> "
+	+ "	<table width='<%=o.options.width%>'cellspacing=0 cellpadding=0 class='gvGrid'/> "
+	+ "</div>"
+	+ "<%//@ sourceURL=GridTemplate.js%>";
+
+
+	RowTemplate = ""
+	+ "<% "
+	+ " if(o.options.selectionColumn) { "
+	+ "%> "
+	+ "	<td><input class='selectionColumn' type='checkbox'/></td>"
+	+ "<% "
+	+ "	} "
+	+ "%> "
+ 	+ "<%_.each(o.options.columns, function(column) { "
+	+ "	var val = column.formatter ? column.formatter.call(o.model, o.model[column.key]) : o.model[column.key], "
+	+ "		sClassName = column.className ? column.className : '', "
+	+ "		editableField = column.editable ? '<input class=\"editField\" type=\"text\" value=\"' + o.model[column.key] + '\"/>' : '';"
+	+ "%> " 
+	+ "	<td class='<%-sClassName%>' key='<%-column.key%>' width='<%=o.options.width / o.options.columns.length%>'><p><%=val%></p><%=editableField%></td> "
+	+ "<%});%>"
+	+ "//@ sourceURL=RowTemplate.js%>";
+
 
 	RowView = Backbone.View.extend({
 		tagName: "tr",

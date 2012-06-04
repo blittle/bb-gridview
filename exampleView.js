@@ -1,4 +1,4 @@
-define(['backbone', 'underscore', 'gridView'], function(Backbone, _, GridView) {
+define(['backbone', 'underscore', 'gridView.min'], function(Backbone, _, GridView) {
 	
 	'use strict';
 

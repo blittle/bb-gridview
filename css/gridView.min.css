@@ -1,0 +1,47 @@
+.gridView .gridWrapper {
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-top: 0;
+  border-right: 0;
+}
+.gridView .gvHeader {
+  background: #B5DBFF;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #b5dbff), color-stop(1, #6eb3fe));
+  background: -ms-linear-gradient(bottom, #b5dbff, #6eb3fe);
+  background: -moz-linear-gradient(center bottom, #b5dbff 0%, #6eb3fe 100%);
+  color: #3789C5;
+  border-bottom: 0;
+  border-right: 0;
+}
+.gridView .gvHeader p {
+  padding: 4px;
+}
+.gridView td {
+  border-right: 1px solid #A9B3BF;
+}
+.gridView td:last-child {
+  border-right: 0;
+}
+.gridView td p {
+  margin: 0;
+  padding: 0;
+  padding-left: 3px;
+}
+.gridView td .editField {
+  display: none;
+}
+.gridView .gvGrid tr {
+  background-color: white;
+}
+.gridView .gvGrid tr:nth-child(even) {
+  background-color: #B5DBFF;
+}
+.gridView .gvGrid tr:hover {
+  background-color: #aaa;
+}
+.gridView .gvGrid tr.selected {
+  background-color: lightgray;
+}
+.gridView .gvGrid tr.selected:nth-child(even) {
+  background-color: #ccc;
+}
